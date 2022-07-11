@@ -6,8 +6,8 @@ Put the two CSV files that you are going to compare under the folder `./data`.
 ## Set the path of two files
 Set the path of two files you are going to compare in `main.java`.
 ```
-ArrayList<String> filecontent1 = csvreader.read(filepath1);
-ArrayList<String> filecontent2 = csvreader.read(filepath2);
+String filepath1 = "./data/sample_file_1.csv";
+String filepath2 = "./data/sample_file_3.csv";
 ```
         
 ## Run `main.java`
