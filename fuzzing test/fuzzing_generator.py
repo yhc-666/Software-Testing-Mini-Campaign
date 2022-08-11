@@ -15,9 +15,11 @@ class Fuzzing_generator:
         # cloumns in this csv file
         col_num = random.randint(0, 4)
         col_index = random.sample([0, 1, 2, 3], col_num)
-        selected_headers = ["Customer ID"] + [self.optional_columns[i] for i in col_index]
+        selected_headers = [self.optional_columns[i] for i in col_index]
 
-        df = pd.DataFrame(columns=selected_headers)
+        headers = ["Customer ID#"] + selected_headers
+
+        df = pd.DataFrame(columns = headers)
 
         # number of rows in this csv file
         row_num = random.randint(min_row_num, max_row_num)
@@ -25,9 +27,11 @@ class Fuzzing_generator:
         # current id
         count_id = 1
 
+        print(headers)
+
         for _ in range(row_num):
             row = {}
-            for col in selected_headers:
+            for col in headers:
                 if col == "Customer ID#":
                     empty = random.random() < fuzz_rate
                     if empty:
@@ -86,8 +90,9 @@ class Fuzzing_generator:
                                 balance += self.digit[random.randint(0, 9)]
                         row["Balance"] = balance
 
+            print(row)
             df = df.append(row, ignore_index=True)
-
+        print(df)
         # save as csv
         df.to_csv(
             f"/Users/haochengyang/Desktop/Study/term5/software_engineering/Software-Testing-Mini-Campaign/fuzzing test/test csv files/{file_name}",
