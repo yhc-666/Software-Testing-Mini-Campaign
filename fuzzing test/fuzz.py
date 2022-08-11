@@ -11,4 +11,4 @@ for i in range(20):
         ordered = True
     else:
         ordered = False
-    generator.generate_test_csv(fuzz_rate=0.6, min_row_num=30, max_row_num=100, file_name=file_name)
+    generator.generate_test_csv(fuzz_rate=0.2, min_row_num=30, max_row_num=100, file_name=file_name)
