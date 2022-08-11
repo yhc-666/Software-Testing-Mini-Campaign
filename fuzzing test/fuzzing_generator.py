@@ -7,17 +7,17 @@ import pandas as pd
 
 class Fuzzing_generator:
     def __init__(self):
-        self.all_headers = ["Customer ID#", "Account No.", "Currency", "Type", "Balance"]
+        self.optional_columns = ["Account No.", "Currency", "Type", "Balance"]
         self.letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         self.digit = "0123456789"
 
     def generate_test_csv(self, fuzz_rate, min_row_num, max_row_num, file_name):
         # cloumns in this csv file
-        col_num = random.randint(0, 5)
-        col_index = random.sample([0, 1, 2, 3, 4], col_num)
-        headers = [self.all_headers[i] for i in col_index]
+        col_num = random.randint(0, 4)
+        col_index = random.sample([0, 1, 2, 3], col_num)
+        selected_headers = [self.optional_columns[i] for i in col_index]
 
-        df = pd.DataFrame(columns=headers)
+        df = pd.DataFrame(columns=["Customer ID"]+selected_headers)
 
         # number of rows in this csv file
         row_num = random.randint(min_row_num, max_row_num)
@@ -27,7 +27,7 @@ class Fuzzing_generator:
 
         for _ in range(row_num):
             row = {}
-            for col in headers:
+            for col in selected_headers:
                 if col == "Customer ID#":
                     empty = random.random() < fuzz_rate
                     if empty:
