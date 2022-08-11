@@ -6,7 +6,7 @@ import pandas as pd
 from fuzzing_generator import Fuzzing_generator
 generator = Fuzzing_generator()
 for i in range(20):
-    file_name = "test" + str(i+1)
+    file_name = "test" + str(i+1) +'.csv'
     if random.random() < 0.5:
         ordered = True
     else:
