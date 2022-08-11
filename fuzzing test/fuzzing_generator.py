@@ -15,9 +15,9 @@ class Fuzzing_generator:
         # cloumns in this csv file
         col_num = random.randint(0, 4)
         col_index = random.sample([0, 1, 2, 3], col_num)
-        selected_headers = [self.optional_columns[i] for i in col_index]
+        selected_headers = ["Customer ID"] + [self.optional_columns[i] for i in col_index]
 
-        df = pd.DataFrame(columns=["Customer ID"]+selected_headers)
+        df = pd.DataFrame(columns=selected_headers)
 
         # number of rows in this csv file
         row_num = random.randint(min_row_num, max_row_num)
